@@ -1,7 +1,7 @@
 import { h } from './core/h.js';
 import { icon, logo } from './core/icons.js';
 import { get as save, update, subscribe } from './core/store.js';
-import { setHaptics } from './core/haptics.js';
+import { setHaptics, mountIosHaptics } from './core/haptics.js';
 import { trackViewport } from './core/viewport.js';
 import { mountRail } from './ui/rail.js';
 import { mountHome, mountIntro } from './screens/home.js';
@@ -47,6 +47,7 @@ setHaptics(save().settings.haptics);
 document.documentElement.style.setProperty('--fs', save().settings.fontSize + 'px');
 trackViewport();
 mountRail();
+mountIosHaptics();
 window.addEventListener('hashchange', route);
 route();
 
