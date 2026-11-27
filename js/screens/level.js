@@ -73,6 +73,7 @@ export function mountLevel(root, id, nav) {
   const el = h('div.lvl', lvlBar, goal, browser.el, dock);
   root.replaceChildren(el);
   document.title = `${level.title} · Hadopsalm`;
+  document.documentElement.classList.add('in-play');
   browser.go(level.start || '/');
 
   if (!s0.seenTour) {
@@ -85,5 +86,5 @@ export function mountLevel(root, id, nav) {
         h('div.sticky-actions', h('button.btn.primary', { onClick: () => closeSheet() }, 'Descend'))),
     });
   }
-  return () => { browser.destroy(); closeSheet(); };
+  return () => { document.documentElement.classList.remove('in-play'); browser.destroy(); closeSheet(); };
 }

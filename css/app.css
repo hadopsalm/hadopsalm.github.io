@@ -32,7 +32,7 @@ textarea.fld,.notes,.bench-in{height:auto;padding:10px;line-height:1.45;resize:v
 .play-root{position:fixed;left:0;right:0;top:var(--vv-top);height:var(--vv-h);background:var(--void);display:flex;justify-content:center}
 .view-play{width:100%;max-width:560px;height:100%}
 .lvl{display:flex;flex-direction:column;height:100%;width:100%}
-.lvl-bar{flex:none;display:flex;align-items:center;gap:6px;height:calc(60px + var(--safe-t) + var(--lift));padding:calc(var(--safe-t) + var(--lift)) calc(10px + var(--safe-r)) 0 calc(6px + var(--safe-l));border-bottom:1px solid var(--line)}
+.lvl-bar{flex:none;display:flex;align-items:center;gap:6px;height:var(--top);padding:calc(var(--safe-t) + var(--lift)) calc(10px + var(--safe-r)) 0 calc(6px + var(--safe-l));border-bottom:1px solid var(--line)}
 .lvl-bar .icon-btn{width:44px;height:44px}
 .lvl-title{flex:1;min-width:0}.lvl-title h1{font:italic 400 24px/1.05 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
 .lvl-title .eyebrow{font-size:9.5px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -87,8 +87,8 @@ textarea.fld,.notes,.bench-in{height:auto;padding:10px;line-height:1.45;resize:v
 .rail button:active{background:var(--bone);color:var(--void)}
 
 /* sheets */
-.sheet{display:flex;flex-direction:column;max-height:calc(var(--vv-h) - 24px);transition:transform .2s}
-.sheet[data-size=half]{height:min(58dvh,520px)}.sheet[data-size=full]{height:calc(var(--vv-h) - 24px)}
+.sheet{display:flex;flex-direction:column;max-height:calc(var(--vv-h) - var(--safe-t) - 16px);transition:transform .2s;border-radius:20px 20px 0 0}
+.sheet[data-size=half]{height:min(58dvh,520px)}.sheet[data-size=full]{height:calc(var(--vv-h) - var(--safe-t) - 16px)}
 .sheet header{flex:none;touch-action:none}.sheet-grip{touch-action:none;flex:none;padding:8px 0}
 .sheet-body{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding-bottom:12px;position:relative}
 .sheet-wrap{z-index:100}
@@ -140,3 +140,18 @@ textarea.fld,.notes,.bench-in{height:auto;padding:10px;line-height:1.45;resize:v
 .benchpage .bench{margin-top:14px}
 [hidden]{display:none!important}
 @media (min-width:700px){.shell{padding-top:calc(var(--top) + 8px)}}
+
+/* Sheets sit below the status bar, on a solid surface, never under it. */
+.sheet-wrap{background:rgba(0,0,0,.72);-webkit-backdrop-filter:none;backdrop-filter:none;top:var(--vv-top);bottom:auto;height:var(--vv-h)}
+.sheet{padding-top:6px;-webkit-font-smoothing:antialiased}
+/* Play: the outer document never scrolls, so touch drags only move the page inside the frame. */
+html.in-play,html.in-play body{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+.vview{touch-action:auto;overscroll-behavior:contain}
+.vframe{transform:none}
+.lens-row input[type=range]{touch-action:pan-x}
+
+/* iPhone haptics: invisible switch laid over each control (see js/core/haptics.js) */
+.hx-host{position:relative}
+.hx{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;opacity:.02;z-index:3;-webkit-appearance:none;appearance:none;background:transparent;border:0;cursor:pointer}
+.hx-host.icon-btn .hx,.hx-host.tool .hx{inset:0}
+.haptics-off .hx{display:none}

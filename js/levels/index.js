@@ -11,6 +11,7 @@ export const CHAPTERS = [
   { id: 'relay', n: 'IV', name: 'Relay', zone: 'Abyss to hadal', range: '4000 – 11000 m', blurb: 'Missions from a fictional relay station: forms, scripts, ciphers, faint ink, injection and forged cookies.', tools: 'Everything', levels: relay },
 ];
 export const LEVELS = CHAPTERS.flatMap((c) => c.levels.map((l, i) => ({ ...l, n: i + 1, chapterName: c.name })));
+CHAPTERS.forEach((c) => { c.levels = LEVELS.filter((l) => l.chapter === c.id); });
 export const BY_ID = Object.fromEntries(LEVELS.map((l) => [l.id, l]));
 export const chapterOf = (id) => CHAPTERS.find((c) => c.id === BY_ID[id]?.chapter);
 
