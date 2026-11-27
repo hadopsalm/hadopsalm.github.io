@@ -68,7 +68,7 @@ export function createBrowser({ level, net, onAlert, onLoad, onHold }) {
   function onMessage(e) {
     if (e.source !== iframe.contentWindow) return;
     const m = e.data; if (!m || m.n !== nonce) return;
-    if (m.t === 'ready') { S.title = m.d.title || ''; paintBar(); el.classList.remove('loading'); applyLantern(); }
+    if (m.t === 'ready') { S.title = m.d.title || ''; paintBar(); el.classList.remove('loading'); applyLantern(); applyLens(); }
     else if (m.t === 'alert') onAlert?.(m.d);
     else if (m.t === 'nav') {
       const d = m.d; let u;
@@ -91,7 +91,7 @@ export function createBrowser({ level, net, onAlert, onLoad, onHold }) {
   // lens
   function applyLens() {
     const L = S.lens, z = L.zoom;
-    iframe.style.width = `${100 / z}%`; iframe.style.height = `${100 / z}%`; iframe.style.transform = `scale(${z})`;
+    iframe.contentWindow?.postMessage({ n: nonce, t: 'zoom', v: z }, '*');
     iframe.style.filter = (L.invert || L.b !== 1 || L.c !== 1) ? `${L.invert ? 'invert(1) ' : ''}brightness(${L.b}) contrast(${L.c})` : '';
     lensBtn.classList.toggle('on', L.invert || L.b !== 1 || L.c !== 1 || z !== 1 || L.lantern);
   }
