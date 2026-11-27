@@ -2,7 +2,7 @@
 export const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 const CSS = `:root{color-scheme:dark}*{box-sizing:border-box}
-html{background:#0d1013;color:#e6e3da;font:16px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-text-size-adjust:100%}
+html{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;background:#0d1013;color:#e6e3da;font:16px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-text-size-adjust:100%}
 body{margin:0 auto;padding:22px 18px 44px;max-width:640px}
 h1,h2,h3{font:italic 400 30px/1.15 'Cormorant Garamond',Georgia,serif;margin:.2em 0 .5em;letter-spacing:-.005em}h2{font-size:24px}h3{font-size:20px}
 a{color:#c9cfd2;text-underline-offset:3px}p{margin:.6em 0}

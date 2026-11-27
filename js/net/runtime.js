@@ -13,6 +13,7 @@ document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&
 document.addEventListener('submit',function(e){var f=e.target;e.preventDefault();var fd={};try{new FormData(f).forEach(function(v,k){fd[k]=String(v)})}catch(x){}
 var s=e.submitter;if(s&&s.name)fd[s.name]=s.value;send('nav',{href:f.getAttribute('action')||'',method:(f.getAttribute('method')||'get').toUpperCase(),form:fd})},true);
 window.addEventListener('message',function(e){var m=e.data;if(!m||m.n!==N)return;
+if(m.t==='zoom'){document.documentElement.style.zoom=m.v===1?'':m.v}
 if(m.t==='hash'){window.vloc.hash=m.v;window.dispatchEvent(new Event('hashchange'))}
 if(m.t==='lantern'){var s=document.getElementById('__lantern');if(m.v&&!s){s=document.createElement('style');s.id='__lantern';s.textContent='*{color:#f0c987!important;-webkit-text-fill-color:#f0c987!important;opacity:1!important;visibility:visible!important;text-shadow:none!important;outline:1px dashed rgba(240,201,135,.45)!important}';(document.head||document.documentElement).append(s)}else if(!m.v&&s)s.remove()}});
 function ready(){send('ready',{title:document.title})}
