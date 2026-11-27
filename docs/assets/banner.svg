@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640"><defs><radialGradient id="g" cx="50%" cy="78%" r="60%"><stop offset="0" stop-color="#1a2127"/><stop offset="1" stop-color="#08090b"/></radialGradient></defs><rect width="1280" height="640" fill="url(#g)"/>
+<g stroke="#7c8891" stroke-opacity=".18"><path d="M0 150H1280"/><path d="M0 270H1280"/><path d="M0 390H1280"/><path d="M0 510H1280"/></g>
+<g font-family="ui-monospace,Menlo,monospace" font-size="13" letter-spacing="3" fill="#818c92"><text x="64" y="144">EPIPELAGIC · DRIFT</text><text x="64" y="264">TWILIGHT · KEEPERS</text><text x="64" y="384">MIDNIGHT · BRINE</text><text x="64" y="504">HADAL · RELAY</text></g>
+<path d="M640 0V330" stroke="#c9cfd2" stroke-width="1.5"/><circle cx="640" cy="372" r="34" fill="#e6e3da"/><circle cx="640" cy="372" r="62" fill="none" stroke="#e6e3da" stroke-opacity=".12"/><circle cx="640" cy="372" r="98" fill="none" stroke="#e6e3da" stroke-opacity=".06"/>
+<text x="640" y="500" text-anchor="middle" font-family="Georgia,'Cormorant Garamond',serif" font-style="italic" font-size="84" fill="#e6e3da">Hadopsalm</text>
+<text x="640" y="548" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="15" letter-spacing="6" fill="#818c92">HYMNS FROM THE HADAL DARK</text></svg>
