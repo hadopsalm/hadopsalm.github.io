@@ -17,7 +17,8 @@ async function play(level) {
   const ctx = ctxFor(SEED, level.id), ch = chapterOf(level.id);
   const solved = Object.fromEntries(ch.levels.slice(0, level.n - 1).map((l) => [l.id, { at: 1, hints: 0 }]));
   const bc = await browser.newContext({ ...devices['iPhone 13'] });
-  await bc.addInitScript(({ seed, solved }) => { try { if (!localStorage.getItem('hadopsalm.save.v1')) localStorage.setItem('hadopsalm.save.v1', JSON.stringify({ v: 1, seed, created: 1, solved, hints: {}, notes: { _: '' }, pocket: [], seenIntro: true, seenTour: true, settings: { haptics: false, fontSize: 16 } })); } catch { /* sandboxed frame */ } }, { seed: SEED, solved });
+  if (process.env.IOS) await bc.addInitScript(() => { try { delete Navigator.prototype.vibrate; } catch { /* sandboxed frame */ } });
+  await bc.addInitScript(({ seed, solved, hx }) => { try { if (!localStorage.getItem('hadopsalm.save.v1')) localStorage.setItem('hadopsalm.save.v1', JSON.stringify({ v: 1, seed, created: 1, solved, hints: {}, notes: { _: '' }, pocket: [], seenIntro: true, seenTour: true, settings: { haptics: hx, fontSize: 16 } })); } catch { /* sandboxed frame */ } }, { seed: SEED, solved, hx: !!process.env.IOS });
   const p = await bc.newPage();
   p.on('pageerror', (e) => errors.push(`${level.id}: ${e.message}`));
   await p.goto(`http://localhost:${PORT}/#/play/${level.id}`);
@@ -87,6 +88,8 @@ async function play(level) {
 }
 
 const only = process.env.ONLY;
+// IOS=1 simulates iPhone Safari (no Vibration API) with haptics on, so every tap goes through the invisible switch overlays.
+
 for (const l of LEVELS) { if (only && !l.id.includes(only)) continue; const f0 = fails; await play(l); console.log(fails === f0 ? '✓' : '✗', l.id, l.title); }
 for (const e of errors) { console.error('page error:', e); fails++; }
 await browser.close(); srv.close();
