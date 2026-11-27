@@ -1,0 +1,16 @@
+{
+  "name": "hadopsalm",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Mobile-first web riddle and wargame descent.",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "assets": "node scripts/generate-assets.mjs",
+    "verify": "node scripts/verify-levels.mjs",
+    "build": "node scripts/build.mjs",
+    "test:e2e": "node scripts/e2e.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
